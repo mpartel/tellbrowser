@@ -11,9 +11,7 @@ var TellBrowser = function (baseUrl, options) {
     key = Cookies.get(cookieName);
     if (!key) {
       key = TellBrowser.randomKey();
-      Cookies.set(cookieName, key, {
-        expires: 365 * 24 * 60 * 60
-      });
+      Cookies.set(cookieName, key);
     }
   }
 
