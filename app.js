@@ -55,7 +55,8 @@ function parseJsonReq(data, req, resp, callback) {
     msg = JSON.parse(data);
   } catch (ex) {
     log.info("Non-JSON message received: " + JSON.stringify(data));
-    respondJson(resp, 500, JSON.stringify({"error": "Could not parse JSON"}));
+    respondJson(resp, 400, JSON.stringify({"error": "Could not parse JSON"}));
+    return;
   }
 
   callback(msg, req, resp);
