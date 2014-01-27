@@ -5,6 +5,7 @@ A stupidly simple [nodejs](http://nodejs.org/) + [socket.io](http://socket.io/)
 pub/sub for sending asynchronous notifications from your server to the user.
 
 It's not production-grade, but may be useful for prototypes, demos etc.
+I've used it as a mock e-mail and text message backend.
 
 ## How it works ##
 
