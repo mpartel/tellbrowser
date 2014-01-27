@@ -1,0 +1,5 @@
+{
+  "port": 4000,
+  "maxListeners": 10000,
+  "maxMsgSize": 4096
+}

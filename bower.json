@@ -1,0 +1,11 @@
+{
+  "name": "tellbrowser",
+  "version": "0.0.1",
+  "ignore": [],
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "bootstrap": "~3.0.3",
+    "notifyjs-dist": "~0.3.1"
+  }
+}

@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="http://localhost:4000/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+
+<div class="container">
+    <br />
+    <br />
+
+    <textarea id="input" type="text" rows="4" cols="60">test</textarea>
+    <br />
+    <br />
+    <button id="sendbtn">Send</button>
+
+    <br />
+    <br />
+    <button id="sendjson">Send some JSON</button>
+
+    <br />
+    <br />
+
+    <h4>Received</h4>
+    <ul id="received">
+    </ul>
+</div>
+
+<script src="http://localhost:4000/socket.io/socket.io.js"></script>
+<script src="http://localhost:4000/lib/jquery/jquery.min.js"></script>
+<script src="http://localhost:4000/lib/notifyjs/notify-combined.min.js"></script>
+<script src="http://localhost:4000/tellbrowser/tellbrowser-client.min.js"></script>
+<script>
+    window.addEventListener('load', function () {
+        var client = new Tellbrowser('http://localhost:4000/tellbrowser');
+
+        // Listener
+        client.listen(function (msg) {
+            var li = document.createElement('li');
+            console.log("Received: ", msg);
+            li.textContent = JSON.stringify(msg);
+            document.getElementById("received").appendChild(li);
+
+            if (typeof(msg) == 'string') {
+                $.notify(msg, {
+                    autoHide: false,
+                    className: 'info'
+                });
+            }
+        });
+
+        // Send buttons
+        document.getElementById('sendbtn').addEventListener('click', function () {
+            var msg = document.getElementById('input').value;
+            client.send(msg);
+        });
+        document.getElementById('sendjson').addEventListener('click', function () {
+            client.send({three: 3, "true": true, "array": [1,2,'many']});
+        });
+    });
+</script>
+</body>
+</html>

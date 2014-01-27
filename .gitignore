@@ -1,0 +1,11 @@
+# Configs
+/config.json
+
+# Build products
+/node_modules
+/bower_components
+/public
+
+# IDEA
+/.idea
+
