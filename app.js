@@ -70,7 +70,7 @@ function handlePostMsg(key, msg, req, resp) {
 var app = connect()
   .use(connect.static('public'))
   .use(function (req, resp) {
-    var match = /\/tellbrowser\/(.+)/.exec(req.url)
+    var match = /^\/keys\/(.+)/.exec(req.url)
     if (match && req.method == 'POST') {
       var key = match[1];
 
@@ -90,7 +90,7 @@ var app = connect()
 var server = http.createServer(app);
 
 
-socketio.listen(server).of('/tellbrowser/socketio').on('connection', function (socket) {
+socketio.listen(server).of('/socketio').on('connection', function (socket) {
   var thisKey = null;
   var thisListener = function (msg) {
     socket.emit('msg', msg, thisKey);

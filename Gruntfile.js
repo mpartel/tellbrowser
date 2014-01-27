@@ -8,7 +8,7 @@ module.exports = function (grunt) {
           'node_modules/cookies-js/src/cookies.js',
           'client/tellbrowser-client.js'
         ],
-        dest: 'public/tellbrowser/tellbrowser-client.min.js'
+        dest: 'public/lib/tellbrowser-client.min.js'
       }
     },
     copy: {

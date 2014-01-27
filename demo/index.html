@@ -31,10 +31,10 @@
 <script src="http://localhost:4000/socket.io/socket.io.js"></script>
 <script src="http://localhost:4000/lib/jquery/jquery.min.js"></script>
 <script src="http://localhost:4000/lib/notifyjs/notify-combined.min.js"></script>
-<script src="http://localhost:4000/tellbrowser/tellbrowser-client.min.js"></script>
+<script src="http://localhost:4000/lib/tellbrowser-client.min.js"></script>
 <script>
     window.addEventListener('load', function () {
-        var client = new TellBrowser('http://localhost:4000/tellbrowser');
+        var client = new TellBrowser('http://localhost:4000/');
 
         // Listener
         client.listen(function (msg) {

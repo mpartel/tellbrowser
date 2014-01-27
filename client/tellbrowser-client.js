@@ -3,7 +3,8 @@ var TellBrowser = function (baseUrl, options) {
     options = {};
   }
 
-  var queueUrl = baseUrl + '/socketio';
+  baseUrl = baseUrl.replace(/\/+$/, '')
+
   var cookieName = 'TellBrowserKey';
 
   var key = options.key;
@@ -16,7 +17,7 @@ var TellBrowser = function (baseUrl, options) {
   }
 
   this.listen = function (callback) {
-    var socket = io.connect(queueUrl, {'force new connection': true});
+    var socket = io.connect(baseUrl + '/socketio', {'force new connection': true});
     socket.on('connect', function () {
       socket.emit('listen', key);
     });
@@ -27,7 +28,7 @@ var TellBrowser = function (baseUrl, options) {
 
   this.send = function (msg) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", baseUrl + "/" + key, true);
+    xhr.open("POST", baseUrl + "/keys/" + key, true);
     xhr.send(JSON.stringify(msg));
   };
 };

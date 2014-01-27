@@ -29,7 +29,7 @@ To start it locally, do `node app.js`.
 Include the following scripts.
 
     <script src="http://localhost:4000/socket.io/socket.io.js"></script>
-    <script src="http://localhost:4000/tellbrowser/tellbrowser-client.min.js"></script>
+    <script src="http://localhost:4000/lib/tellbrowser-client.min.js"></script>
 
 Here's a usage example using [notifyjs](http://notifyjs.com/):
 
@@ -40,7 +40,7 @@ Here's a usage example using [notifyjs](http://notifyjs.com/):
 
     <script>
         window.addEventListener('load', function () {
-            var client = new TellBrowser('http://localhost:4000/tellbrowser');
+            var client = new TellBrowser('http://localhost:4000/');
 
             client.listen(function (msg) {
                 // We're assuming the server sends simple strings.
