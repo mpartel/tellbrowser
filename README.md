@@ -20,10 +20,12 @@ A better implementation might store the messages for a few minutes or until the 
 
 ## How to use ##
 
-Copy `config.example.json` to `config.json` and edit if necessary.
+1. Copy `config.example.json` to `config.json` and edit if necessary.
+2. Run `npm install` and `bower install` to download dependencies.
+3. Run `grunt` to build.
+4. Start with `node app.js`.
 
-This is a node app. Currently it cannot be distributed - only a single instance must run.
-To start it locally, do `node app.js`.
+Currently the app can only be run as a single instance.
 
 ### Client ###
 
