@@ -8,7 +8,7 @@ It's not production-grade, but may be useful for prototypes, demos etc.
 
 ## How it works ##
 
-1. The user generates a random cookie named `TellbrowserKey` and subs to a channel with that name.
+1. The user generates a random cookie named `TellBrowserKey` and subs to a channel with that name.
 2. The cookie gets sent with subsequent requests.
 3. The server can store the cookie and POST to it to notify the user after a background operation completes.
 
@@ -40,7 +40,7 @@ Here's a usage example using [notifyjs](http://notifyjs.com/):
 
     <script>
         window.addEventListener('load', function () {
-            var client = new Tellbrowser('http://localhost:4000/tellbrowser');
+            var client = new TellBrowser('http://localhost:4000/tellbrowser');
 
             client.listen(function (msg) {
                 // We're assuming the server sends simple strings.
@@ -54,5 +54,5 @@ Here's a usage example using [notifyjs](http://notifyjs.com/):
 ### Server ###
 
 Just send a POST request to `http://localhost:4000/tellbrowser/<key>` where
-`<key>` is the value of the `TellbrowserKey` cookie. The body of the request
+`<key>` is the value of the `TellBrowserKey` cookie. The body of the request
 can be any JSON object.

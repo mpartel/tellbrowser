@@ -1,16 +1,16 @@
-var Tellbrowser = function (baseUrl, options) {
+var TellBrowser = function (baseUrl, options) {
   if (!options) {
     options = {};
   }
 
   var queueUrl = baseUrl + '/socketio';
-  var cookieName = 'TellbrowserKey';
+  var cookieName = 'TellBrowserKey';
 
   var key = options.key;
   if (!key) {
     key = Cookies.get(cookieName);
     if (!key) {
-      key = Tellbrowser.randomKey();
+      key = TellBrowser.randomKey();
       Cookies.set(cookieName, key, {
         expires: 365 * 24 * 60 * 60
       });
@@ -34,6 +34,6 @@ var Tellbrowser = function (baseUrl, options) {
   };
 };
 
-Tellbrowser.randomKey = function () {
+TellBrowser.randomKey = function () {
   return uuid.v4();
 };
