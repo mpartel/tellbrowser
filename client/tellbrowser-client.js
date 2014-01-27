@@ -29,6 +29,7 @@ var TellBrowser = function (baseUrl, options) {
   this.send = function (msg) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", baseUrl + "/keys/" + key, true);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.send(JSON.stringify(msg));
   };
 };
