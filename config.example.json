@@ -1,5 +1,7 @@
 {
   "port": 4000,
   "maxListeners": 10000,
-  "maxMsgSize": 4096
+  "maxMsgSize": 4096,
+  "sslKeyPath": null,
+  "sslCertPath": null
 }

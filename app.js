@@ -1,9 +1,9 @@
 
 var connect = require('connect')
-var http = require('http');
 var socketio = require('socket.io');
 var config = require(__dirname + '/config.json');
 var events = require('events');
+var fs = require('fs');
 
 var maxMsgSize = config.maxMsgSize;
 var maxListeners = config.maxListeners; // TODO: use
@@ -88,7 +88,16 @@ var app = connect()
   });
 
 
-var server = http.createServer(app);
+var server;
+if (config.sslKeyPath && config.sslCertPath) {
+  var serverOptions = {
+    key: fs.readFileSync(config.sslKeyPath),
+    cert: fs.readFileSync(config.sslCertPath)
+  };
+  server = require('https').createServer(serverOptions, app);
+} else {
+  server = require('http').createServer(app);
+}
 
 
 socketio.listen(server).of('/socketio').on('connection', function (socket) {
