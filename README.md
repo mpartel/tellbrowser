@@ -9,7 +9,7 @@ I've used it as a mock e-mail and text message backend.
 
 ## How it works ##
 
-1. The user generates a random cookie named `TellBrowserKey` and subs to a channel with that name.
+1. The client makes a random cookie named `TellBrowserKey` and subs to a channel with that name.
 2. The cookie gets sent with subsequent requests.
 3. The server can store the cookie and POST to it to notify the user after a background operation completes.
 
@@ -47,10 +47,7 @@ Here's a usage example using [notifyjs](http://notifyjs.com/):
 
             client.listen(function (msg) {
                 // We're assuming the server sends simple strings.
-                $.notify(msg, {
-                    autoHide: false,
-                    className: 'info'
-                });
+                $.notify(msg, { autoHide: false, className: 'info' });
             });
     </script>
 
