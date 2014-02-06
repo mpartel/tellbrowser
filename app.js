@@ -88,45 +88,49 @@ var app = connect()
   });
 
 
-var server;
-if (config.sslKeyPath && config.sslCertPath) {
+function setUpServer(server) {
+  socketio.listen(server).of('/socketio').on('connection', function (socket) {
+    var thisKey = null;
+    var thisListener = function (msg) {
+      socket.emit('msg', msg, thisKey);
+    };
+
+    function clear() {
+      if (thisKey) {
+        emitter.removeListener(thisKey, thisListener);
+      }
+
+      thisKey = null;
+    }
+
+    socket.on('listen', function (key) {
+      log.debug("Key " + key + " being listened");
+
+      clear();
+
+      thisKey = key;
+      emitter.on(key, thisListener);
+    });
+
+    socket.on('disconnect', function () {
+      clear();
+    })
+  });
+}
+
+if (config.httpPort) {
+  var httpServer = require('http').createServer(app);
+  setUpServer(httpServer);
+  httpServer.listen(config.httpPort);
+}
+
+
+if (config.httpsPort) {
   var serverOptions = {
     key: fs.readFileSync(config.sslKeyPath),
     cert: fs.readFileSync(config.sslCertPath)
   };
-  server = require('https').createServer(serverOptions, app);
-} else {
-  server = require('http').createServer(app);
+  var httpsServer = require('https').createServer(serverOptions, app);
+  setUpServer(httpsServer);
+  httpsServer.listen(config.httpsPort);
 }
-
-
-socketio.listen(server).of('/socketio').on('connection', function (socket) {
-  var thisKey = null;
-  var thisListener = function (msg) {
-    socket.emit('msg', msg, thisKey);
-  };
-
-  function clear() {
-    if (thisKey) {
-      emitter.removeListener(thisKey, thisListener);
-    }
-
-    thisKey = null;
-  }
-
-  socket.on('listen', function (key) {
-    log.debug("Key " + key + " being listened");
-
-    clear();
-
-    thisKey = key;
-    emitter.on(key, thisListener);
-  });
-
-  socket.on('disconnect', function () {
-    clear();
-  })
-});
-
-
-server.listen(config.port);
