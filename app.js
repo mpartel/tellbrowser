@@ -128,7 +128,8 @@ if (config.httpPort) {
 if (config.httpsPort) {
   var serverOptions = {
     key: fs.readFileSync(config.sslKeyPath),
-    cert: fs.readFileSync(config.sslCertPath)
+    cert: fs.readFileSync(config.sslCertPath),
+    ca: (config.sslCaPaths || []).map(fs.readFileSync)
   };
   var httpsServer = require('https').createServer(serverOptions, app);
   setUpServer(httpsServer);

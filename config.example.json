@@ -4,5 +4,6 @@
   "httpPort": 4000,
   "httpsPort": null,
   "sslKeyPath": null,
-  "sslCertPath": null
+  "sslCertPath": null,
+  "sslCaPaths": []
 }
